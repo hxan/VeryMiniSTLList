@@ -1,18 +1,79 @@
 #include <iostream>
 #include"list_function.h"
+#include<vector>
 using namespace std;
-int main(int argc, char** argv) {
-	list<int> a;
-	list<int> b;
-	iter<int> it;
+template<class T>
+
+/*
+stack list
+*/
+class stack{
+	private:
+		list<T> a;
+	public:
+		T push(T data){
+			T temp = a.back();
+			a.push_back(data);
+			return temp;
+		}
+		T pop(){
+			T temp = a.back();
+			a.pop_back();
+			return temp;
+		}
+
+		bool empty(){
+			return a.empty();
+		}
+		int size(){
+			return a.size();
+		}
+		~stack(){
+			a.clear();
+			a.~list();
+		}
+};
+
+template<class T>
+class stack_vector
+{
+	private:
+		vector<T> a;
+	public:
+		stack_vector(){
+		}
+		~stack_vector(){
+		}
+
+		T push(T data){
+
+			T temp = a[a.size()-1];
+			a.push_back(data);
+			return temp;
+		}		
+		T pop(){
+			T temp = a[a.size()-1];
+			a.pop_back();
+			return temp;
+		}
+
+		int size(){
+			return a.size();
+		}
+
 	
-	for(int i = 0 ; i < 10; i++){
-		a.push_back(i);
+};
+
+
+int main(int argc, char** argv) {
+	stack<int> s;
+	for(int i = 0; i < 10; i++){
+		s.push(i);
 	}
-	for(int i = 10 ; i < 20; i++){
-		b.push_back(i);
-	}
-	a.merge(b);
-	a.print(1);
+	cout<<s.pop()<<endl;
+	s.push(100);
+	cout<<s.pop();
+
+
 	return 0;
 }

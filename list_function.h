@@ -39,7 +39,7 @@ void list<T>::assign(int n,T x)
 	return ;
 }
 template <class T>
-void list<T>::insert(iter<T> it,T v)////这个还没写 
+void list<T>::insert(Iterator it,T v)////这个还没写 
 {
 	if(size==0)
 		return ;
@@ -65,7 +65,7 @@ void list<T>::insert(iter<T> it,T v)////这个还没写
 	return ;
 }
 template <class T>
-void list<T>::erase(iter<T> it)
+void list<T>::erase(Iterator it)
 {
 	if(size==0) 
 		return;
@@ -98,12 +98,14 @@ void list<T>::erase(iter<T> it)
 template <class T>
 int list<T>::front()
 {
-	return head->val;
+	if(!empty())
+			return head->val;
 }
 template <class T>
 int list<T>::back()
 {
-	return tail->val;
+	if(!empty())
+		return tail->val;
 }
 template <class T>
 void list<T>::resize(int n)

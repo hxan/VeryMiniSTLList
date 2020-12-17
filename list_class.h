@@ -7,18 +7,20 @@ struct Node{
 	struct Node *front;
 	struct Node *next;
 };
-template <class T>
-class iter{
+
+class Iterator{
 	public:
-		iter(){}
-	Node<T> *p;//p为链表指针
-	T operator*(){return (p->val);};
+	Iterator(){}
+
+	Node<int> *p;//p为链表指针
+	//auto operator*() -> decltype((p->val)){return (p->val);}
+	//operator*()
 	void operator ++(int f){p=p->next;}
 	void operator --(int f){p=p->front;}
 	
-	bool operator !=(iter<T> t)
+	bool operator !=(Node<int> *t)
 	{
-		if(p!=t.p)
+		if(p!=t)
 		{
 			return 1;
 		}
@@ -27,22 +29,22 @@ class iter{
 	
 	void operator ++(){p=p->next;}
 	void operator --(){p=p->front;}
-	void operator=(Node<T> *b){p=b;}
+	void operator=(Node<int> *b){p=b;}
 };	
 template <class T>
 class list{//构建list类 
 	public:
-		Node<T> *a=0;
-		Node<T> *head=0;//头 
-		Node<T> *tail=0;//尾
-		int size=0;	 
+		Node<T> *a;
+		Node<T> *head;//头 
+		Node<T> *tail;//尾
+		int size = 0;	 
 	void assign(int n,T );
 	void merge(list<T> &b);
 	void swap(list<T>&,list<T>&);
-	void insert(iter<T> it,T);//在IT后面插入
+	void insert(Iterator it,T);//在IT后面插入
 	 
-	void erase(iter<T> it);
-	void erase(iter<T> first,iter<T> last);
+	void erase(Iterator it);
+	void erase(Iterator first,Iterator last);
 	
 	int front();
 	int back();
@@ -58,7 +60,7 @@ class list{//构建list类
 	void clear(); 
 	list(int n=0,T v=0)
 	{
-		Create_Link(n,v);
+		Create_Link(n,v); 
 	}
 	Node<T>* begin()
 	{
